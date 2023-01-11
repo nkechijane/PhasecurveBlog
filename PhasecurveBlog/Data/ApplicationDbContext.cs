@@ -12,4 +12,5 @@ public class ApplicationDbContext : IdentityDbContext
     }
 
     public DbSet<Article> Articles { get; set; }
+    public DbSet<Author> Authors { get; set; }
 }

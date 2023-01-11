@@ -9,6 +9,23 @@ public class ArticleRepository : IRepository
     public ArticleRepository(ApplicationDbContext context)
     {
         _context = context;
+        var id = 1;
+        if (!_context.Articles.Any(a => a.Id == id))
+        {
+            _context.Articles.Add(
+                new Article
+                {
+                    Body = "In fact, one major benefit to not being all the buzz is that “the buzz” has evolved far enough in the last several years that many modern patterns can be applied to more traditional means of building websites and applications.",
+                    Description = "This is a dummy article for display purposes",
+                    Title = "Test",
+                    Id = id,
+                    LastEdited =DateTime.Now,
+                    Published = DateTime.Now,
+                    Images = string.Empty
+                });
+            _context.SaveChanges();
+            
+        }
     }
     
     public void AddArticle(Article article)
@@ -36,13 +53,5 @@ public class ArticleRepository : IRepository
         _context.Articles.Remove(GetArticleById(id));
     }
 
-    public async Task<bool> SaveChangesAsync()
-    {
-        if (await _context.SaveChangesAsync() > 0)
-        {
-            return true;
-        }
-
-        return false;
-    }
+    public async Task<bool> SaveChangesAsync() => await _context.SaveChangesAsync() > 0;
 }

@@ -20,4 +20,8 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.9" />
     </ItemGroup>
 
+    <ItemGroup>
+      <AdditionalFiles Include="Views\Article\Index.cshtml" />
+    </ItemGroup>
+
 </Project>

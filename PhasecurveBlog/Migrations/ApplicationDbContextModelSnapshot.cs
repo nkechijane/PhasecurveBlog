@@ -219,15 +219,11 @@ namespace PhasecurveBlog.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("AuthorId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Body")
                         .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("Created")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
@@ -238,8 +234,10 @@ namespace PhasecurveBlog.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Tags")
-                        .IsRequired()
+                    b.Property<DateTime>("LastEdited")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Published")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
@@ -248,7 +246,24 @@ namespace PhasecurveBlog.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Articles", (string)null);
+                    b.HasIndex("AuthorId");
+
+                    b.ToTable("Articles");
+                });
+
+            modelBuilder.Entity("PhasecurveBlog.Models.Author", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Authors");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -300,6 +315,18 @@ namespace PhasecurveBlog.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("PhasecurveBlog.Models.Article", b =>
+                {
+                    b.HasOne("PhasecurveBlog.Models.Author", null)
+                        .WithMany("Articles")
+                        .HasForeignKey("AuthorId");
+                });
+
+            modelBuilder.Entity("PhasecurveBlog.Models.Author", b =>
+                {
+                    b.Navigation("Articles");
                 });
 #pragma warning restore 612, 618
         }
