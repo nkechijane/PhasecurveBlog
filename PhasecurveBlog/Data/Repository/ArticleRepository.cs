@@ -9,15 +9,17 @@ public class ArticleRepository : IRepository
     public ArticleRepository(ApplicationDbContext context)
     {
         _context = context;
-        var id = 1;
+        var id = 2;
         if (!_context.Articles.Any(a => a.Id == id))
         {
             _context.Articles.Add(
                 new Article
                 {
-                    Body = "In fact, one major benefit to not being all the buzz is that “the buzz” has evolved far enough in the last several years that many modern patterns can be applied to more traditional means of building websites and applications.",
-                    Description = "This is a dummy article for display purposes",
-                    Title = "Test",
+                    Body = "In fact, one major benefit to not being all the buzz is that “the buzz” has evolved far enough " +
+                           "in the last several years that many modern patterns can be applied to more traditional means of " +
+                           "building websites and applications.",
+                    Description = "This is another data for test",
+                    Title = "buzz data",
                     Id = id,
                     LastEdited =DateTime.Now,
                     Published = DateTime.Now,

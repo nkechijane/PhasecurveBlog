@@ -16,12 +16,39 @@ public class ArticleController : Controller
     [HttpGet]
     public IActionResult Index()
     {
-        return View(_repo.GetAllArticles());
+        var allRepo = _repo.GetAllArticles();
+        return View(allRepo);
     }
     
     [HttpGet]
-    public IActionResult Article(int id)
+    public IActionResult GetArticle(int id)
     {
         return View(_repo.GetArticleById(id));
+    }
+
+    [HttpPost] public IActionResult AddArticle(Article article)
+    {
+        _repo.AddArticle(article);
+        return View(Index());
+    } 
+    
+    [HttpPost] public IActionResult UpdateArticle(int id, string title, string body)
+    {
+        var article = _repo.GetArticleById(id);
+        if (article.Id > 0)
+        {
+            article.Title = title;
+            article.Body = body;
+            article.LastEdited = DateTime.Now;
+            
+            _repo.UpdateArticle(article);
+        }
+        return View(Index());
+    } 
+    
+    [HttpDelete] public IActionResult DeleteArticle(int id)
+    {
+        _repo.RemoveArticle(id);
+        return View(Index());
     }
 }
