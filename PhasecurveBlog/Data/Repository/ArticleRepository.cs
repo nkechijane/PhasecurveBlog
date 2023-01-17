@@ -1,8 +1,9 @@
+using PhasecurveBlog.Interfaces;
 using PhasecurveBlog.Models;
 
 namespace PhasecurveBlog.Data.Repository;
 
-public class ArticleRepository : IRepository
+public class ArticleRepository : IArticleRepository
 {
     private readonly ApplicationDbContext _context;
     
@@ -37,7 +38,8 @@ public class ArticleRepository : IRepository
 
     public Article GetArticleById(int id)
     {
-        return _context.Articles.FirstOrDefault(a => a.Id == id);
+        var response = _context.Articles.FirstOrDefault(a => a.Id == id);
+        return response ?? new Article();
     }
 
     public List<Article> GetAllArticles()
@@ -54,6 +56,6 @@ public class ArticleRepository : IRepository
     {
         _context.Articles.Remove(GetArticleById(id));
     }
-
+    
     public async Task<bool> SaveChangesAsync() => await _context.SaveChangesAsync() > 0;
 }
