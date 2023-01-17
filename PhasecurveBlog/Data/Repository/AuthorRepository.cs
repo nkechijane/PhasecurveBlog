@@ -17,7 +17,8 @@ public class AuthorRepository : IAuthorRepository
     }
     public Author GetAuthor(int id)
     {
-        return _context.Authors.FirstOrDefault(a => a.Id == id);
+        var response = _context.Authors.FirstOrDefault(a => a.Id == id);
+        return response ?? new Author();
     }
 
     public List<Author> GetAllAuthors()
@@ -34,4 +35,6 @@ public class AuthorRepository : IAuthorRepository
     { 
         _context.Authors.Update(author);
     }
+    
+    public async Task<bool> SaveChangesAsync() => await _context.SaveChangesAsync() > 0;
 }
