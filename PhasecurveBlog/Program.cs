@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PhasecurveBlog.Data;
 using PhasecurveBlog.Data.Repository;
-using PhasecurveBlog.Models;
+using PhasecurveBlog.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +16,8 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<IRepository, ArticleRepository>();
+builder.Services.AddScoped<IArticleRepository, ArticleRepository>();
+builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.

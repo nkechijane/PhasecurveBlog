@@ -24,4 +24,14 @@
       <AdditionalFiles Include="Views\Article\Index.cshtml" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Pages\Author\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Author\AddAuthor.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Author\DeleteArticle.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Author\GetAllAuthors.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Author\GetArticle.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Author\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Author\UpdateArticle.cshtml" />
+    </ItemGroup>
+
 </Project>
