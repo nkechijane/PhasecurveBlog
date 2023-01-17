@@ -1,11 +1,11 @@
 using PhasecurveBlog.Models;
 
-namespace PhasecurveBlog.Data.Repository;
+namespace PhasecurveBlog.Interfaces;
 
-public interface IRepository
+public interface IArticleRepository
 {
     void AddArticle(Article article);
-    Article GetArticleById(int id);
+    Article? GetArticleById(int id);
     List<Article> GetAllArticles();
     void UpdateArticle(Article article);
     void RemoveArticle(int id);

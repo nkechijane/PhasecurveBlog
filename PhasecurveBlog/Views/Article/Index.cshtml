@@ -5,8 +5,24 @@
 
 <div class="text-center">
     <h1 class="display-4">All Articles</h1>
-   @foreach(Article art in Model){
-        <a href="article/article/@art.Id">@art.Title</a>
-    }
+   <table>
+       <tr style="text-align: center">
+           <th>SN</th>
+           <th>Title</th>
+           <th>Description</th>
+           <th>Action</th>
+       </tr>
+       @foreach (Article art in Model)
+       {
+           <tr style="text-align: left">
+               <td>@art.Id</td>
+               <td>@art.Title</td>
+               <td class="chars">@art.Description</td>
+               <td>
+                   <a href="article/GetArticle/@art.Id">View</a>
+               </td>
+           </tr>
+       }
+   </table>
 
 </div>
