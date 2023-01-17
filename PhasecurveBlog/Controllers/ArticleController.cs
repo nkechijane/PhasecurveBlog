@@ -1,14 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
-using PhasecurveBlog.Data.Repository;
+using PhasecurveBlog.Interfaces;
 using PhasecurveBlog.Models;
 
 namespace PhasecurveBlog.Controllers;
 
 public class ArticleController : Controller
 {
-    private readonly IRepository _repo;
+    private readonly IArticleRepository _repo;
 
-    public ArticleController(IRepository repo)
+    public ArticleController(IArticleRepository repo)
     {
         _repo = repo;
     }
@@ -19,6 +19,12 @@ public class ArticleController : Controller
         var allRepo = _repo.GetAllArticles();
         return View(allRepo);
     }
+
+    [HttpGet]
+    public IActionResult ArticleNotFound(int id)
+    {
+        return View($"The article with Id: {id} was not found.");
+    }
     
     [HttpGet]
     public IActionResult GetArticle(int id)
@@ -26,29 +32,46 @@ public class ArticleController : Controller
         return View(_repo.GetArticleById(id));
     }
 
-    [HttpPost] public IActionResult AddArticle(Article article)
+    [HttpPost] 
+    public IActionResult AddArticle(Article article)
     {
         _repo.AddArticle(article);
         return View(Index());
     } 
-    
-    [HttpPost] public IActionResult UpdateArticle(int id, string title, string body)
+
+    /*[HttpGet] 
+    public IActionResult UpdateArticle(int id)
     {
+        ViewData["Error"] = "false";
+        return View(_repo.GetArticleById(id));
+    } */
+    
+    [HttpPost]
+    public IActionResult UpdateArticle(int id, string title, string body, string description)
+    {
+        ViewData["Error"] = "false";
         var article = _repo.GetArticleById(id);
-        if (article.Id > 0)
+        if (article is not null)
         {
             article.Title = title;
             article.Body = body;
+            article.Description = description;
             article.LastEdited = DateTime.Now;
             
             _repo.UpdateArticle(article);
         }
-        return View(Index());
-    } 
-    
+        else
+        {
+            ViewData["Error"] = "Resource not found";
+        }
+        _repo.SaveChangesAsync();
+        return View(_repo.GetArticleById(id));
+    }
+
     [HttpDelete] public IActionResult DeleteArticle(int id)
     {
         _repo.RemoveArticle(id);
+        _repo.SaveChangesAsync();
         return View(Index());
     }
 }
