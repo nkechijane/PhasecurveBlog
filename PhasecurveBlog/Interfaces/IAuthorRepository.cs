@@ -9,4 +9,5 @@ public interface IAuthorRepository
     void UpdateAuthor(Author author);
     Author GetAuthor(int id);
     List<Author> GetAllAuthors();
+    Task<bool> SaveChangesAsync();
 }
