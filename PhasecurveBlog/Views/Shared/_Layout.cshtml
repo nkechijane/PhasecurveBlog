@@ -7,6 +7,17 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
     <link rel="stylesheet" href="~/PhasecurveBlog.styles.css" asp-append-version="true"/>
+    <style>
+        table, th, td {
+          border: 1px solid black;
+        }
+        .chars {
+            max-width: 30ch;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    </style>
 </head>
 <body>
 <header>
@@ -26,7 +37,7 @@
                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Blogs</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Article" asp-action="Index">All Articles</a>
                     </li>
                 </ul>
                 <partial name="_LoginPartial"/>
