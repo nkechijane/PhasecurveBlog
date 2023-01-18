@@ -39,12 +39,12 @@ public class ArticleController : Controller
         return View(Index());
     } 
 
-    /*[HttpGet] 
+    [HttpGet] 
     public IActionResult UpdateArticle(int id)
     {
         ViewData["Error"] = "false";
         return View(_repo.GetArticleById(id));
-    } */
+    } 
     
     [HttpPost]
     public IActionResult UpdateArticle(int id, string title, string body, string description)

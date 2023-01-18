@@ -14,12 +14,17 @@ public class AuthorController : Controller
         _repo = repo;
     }
 
+    public IActionResult AddAuthor()
+    {
+        return View();
+    } 
+
     [HttpPost] 
     public IActionResult AddAuthor(Author author)
     {
         _repo.RegisterAuthor(author);
         _repo.SaveChangesAsync();
-        return View();
+        return Redirect("../Home/Index");
     } 
 
     [HttpGet]
@@ -35,8 +40,23 @@ public class AuthorController : Controller
         return View(_repo.GetAuthor(id));
     }
     
+    public IActionResult UpdateAuthor(int id)
+    {
+        ViewData["Error"] = "false";
+        var author = _repo.GetAuthor(id);
+        if (author.Id > 0)
+        {
+            return View(author);
+        }
+        else
+        {
+            ViewData["Error"] = "Resource not found";
+            return View(author);
+        }
+    }
+    
     [HttpPost]
-    public IActionResult UpdateAuthors(int id, string name)
+    public IActionResult UpdateAuthor(int id, string name)
     {
         ViewData["Error"] = "false";
         var author = _repo.GetAuthor(id);
@@ -46,23 +66,19 @@ public class AuthorController : Controller
             author.UpdatedOn = DateTime.Now;
             
             _repo.UpdateAuthor(author);
+            _repo.SaveChangesAsync();
         }
         else
         {
             ViewData["Error"] = "Resource not found";
         }
-        return View(_repo.GetAuthor(id));
+        return View(_repo.GetAuthor(7));
     }
 
-    [HttpDelete] public IActionResult DeleteArticle(int id)
+    public IActionResult DeleteAuthor(int id)
     {
         _repo.RemoveAuthor(id);
-        return View();
-    }
-
-    [HttpGet]
-    public IActionResult ArticleNotFound(int id)
-    {
-        return View($"The article with Id: {id} was not found.");
+        _repo.SaveChangesAsync();
+        return Redirect("../Author/GetAllAuthors");
     }
 }

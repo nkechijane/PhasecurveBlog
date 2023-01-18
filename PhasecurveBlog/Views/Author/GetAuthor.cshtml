@@ -4,4 +4,12 @@
     ViewBag.Title = "title";
 }
 
-<h2>title</h2>
+
+<div>
+    <h1 class="display-4">@Model.Id</h1>
+    <div>@Model.Name</div>
+    <div>@Model.RegisteredTime</div>
+    <div>@Model.UpdatedOn</div>
+    <a href="../Author/UpdateAuthors/@Model.Id">Update</a>
+    <a href="../Author/DeleteAuthor/@Model.Id">Delete</a>
+</div>

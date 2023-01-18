@@ -1,7 +1,10 @@
-@model dynamic
-
 @{
     ViewBag.Title = "title";
 }
-
-<h2>title</h2>
+<form method="post">
+    <div>
+        <label for="name" style="font-weight: 500;">Full Name<span style="color: rgb(185, 74, 72);">**</span></label>
+        <input type="text" id="name" name="name" required>
+    </div>
+    <button type="submit"> Submit </button>
+</form>

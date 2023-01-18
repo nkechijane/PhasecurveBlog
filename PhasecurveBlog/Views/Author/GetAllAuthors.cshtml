@@ -1,7 +1,29 @@
 @model System.Collections.Generic.List<PhasecurveBlog.Models.Author>
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "Authors";
 }
 
-<h2>title</h2>
+<div class="text-center">
+    <h1 class="display-4">All Authors</h1>
+   <table>
+       <tr style="text-align: center">
+           <th>SN</th>
+           <th>Name</th>
+           <th>Date Created</th>
+           <th>Action</th>
+       </tr>
+       @foreach (Author author in Model)
+       {
+           <tr style="text-align: left">
+               <td>@author.Id</td>
+               <td>@author.Name</td>
+               <td>@author.RegisteredTime</td>
+               <td>
+                   <a href="../Author/GetAuthor/@author.Id">View</a>
+               </td>
+           </tr>
+       }
+   </table>
+
+</div>

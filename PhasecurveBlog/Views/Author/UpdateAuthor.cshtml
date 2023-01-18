@@ -1,0 +1,14 @@
+@model Author
+
+@{
+    ViewBag.Title = "Update Author";
+}
+
+<form method="post">
+    <div>
+        <label for="name" style="font-weight: 500;">Full Name<span style="color: rgb(185, 74, 72);">**</span></label>
+        <input type="text" id="name" name="name" value="@Model.Name">
+        <input type="text" id="id" name="id" value="@Model.Id" hidden>
+    </div>
+   <button type="submit">Submit</button>
+</form>

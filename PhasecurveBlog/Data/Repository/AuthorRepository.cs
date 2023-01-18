@@ -13,6 +13,7 @@ public class AuthorRepository : IAuthorRepository
     }
     public void RegisterAuthor(Author author)
     {
+        author.RegisteredTime = DateTime.Now;
         _context.Authors.Add(author);
     }
     public Author GetAuthor(int id)
@@ -28,11 +29,12 @@ public class AuthorRepository : IAuthorRepository
 
     public void RemoveAuthor(int id)
     {
-        _context.Authors.FirstOrDefault(GetAuthor(id));
+        _context.Authors.Remove(GetAuthor(id));
     }
 
     public void UpdateAuthor(Author author)
     { 
+        author.UpdatedOn = DateTime.Now;
         _context.Authors.Update(author);
     }
     
