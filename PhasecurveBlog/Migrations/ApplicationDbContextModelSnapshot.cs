@@ -219,9 +219,6 @@ namespace PhasecurveBlog.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("AuthorId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Body")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -246,8 +243,6 @@ namespace PhasecurveBlog.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AuthorId");
-
                     b.ToTable("Articles");
                 });
 
@@ -259,6 +254,12 @@ namespace PhasecurveBlog.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("RegisteredTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("UpdatedOn")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -315,18 +316,6 @@ namespace PhasecurveBlog.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("PhasecurveBlog.Models.Article", b =>
-                {
-                    b.HasOne("PhasecurveBlog.Models.Author", null)
-                        .WithMany("Articles")
-                        .HasForeignKey("AuthorId");
-                });
-
-            modelBuilder.Entity("PhasecurveBlog.Models.Author", b =>
-                {
-                    b.Navigation("Articles");
                 });
 #pragma warning restore 612, 618
         }
