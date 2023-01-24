@@ -32,10 +32,18 @@ public class ArticleController : Controller
         return View(_repo.GetArticleById(id));
     }
 
+    [HttpGet] 
+    public IActionResult AddArticle()
+    {
+        return View(Index());
+    }
+
     [HttpPost] 
     public IActionResult AddArticle(Article article)
     {
+        article.Published = DateTime.Now;
         _repo.AddArticle(article);
+        _repo.SaveChangesAsync();
         return View(Index());
     } 
 
@@ -65,13 +73,13 @@ public class ArticleController : Controller
             ViewData["Error"] = "Resource not found";
         }
         _repo.SaveChangesAsync();
-        return View(_repo.GetArticleById(id));
+        return Redirect("Index");
     }
 
-    [HttpDelete] public IActionResult DeleteArticle(int id)
+    [HttpPost] public IActionResult DeleteArticle(int id)
     {
         _repo.RemoveArticle(id);
         _repo.SaveChangesAsync();
-        return View(Index());
+        return Redirect("~/Article/Index");
     }
 }

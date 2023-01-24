@@ -72,13 +72,14 @@ public class AuthorController : Controller
         {
             ViewData["Error"] = "Resource not found";
         }
-        return View(_repo.GetAuthor(7));
+        return View(_repo.GetAuthor(id));
     }
-
+    
+    [HttpPost]
     public IActionResult DeleteAuthor(int id)
     {
         _repo.RemoveAuthor(id);
         _repo.SaveChangesAsync();
-        return Redirect("../Author/GetAllAuthors");
+        return Redirect("GetAllAuthors");
     }
 }

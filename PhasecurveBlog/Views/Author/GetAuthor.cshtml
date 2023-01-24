@@ -4,12 +4,26 @@
     ViewBag.Title = "title";
 }
 
-
 <div>
-    <h1 class="display-4">@Model.Id</h1>
+    <h6 class="display-4">SN: @Model.Id</h6>
     <div>@Model.Name</div>
     <div>@Model.RegisteredTime</div>
     <div>@Model.UpdatedOn</div>
-    <a href="../Author/UpdateAuthors/@Model.Id">Update</a>
-    <a href="../Author/DeleteAuthor/@Model.Id">Delete</a>
+    <a href="~/Author/UpdateAuthor/@Model.Id">Update</a>
+    <a onclick="document.getElementById('id01').style.display='block'">Delete</a>
+</div>
+
+<div id="id01" class="modal">
+    <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+    <form class="modal-content" method="post" action="~/Author/DeleteAuthor/@Model.Id">
+        <div class="container">
+            <h1>Delete Author</h1>
+            <p>Are you sure you want to delete this Author?</p>
+
+            <div class="clearfix">
+                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                <button type="submit" class="deletebtn" method="DeleteAuthor"><a>Delete</a></button>
+            </div>
+        </div>
+    </form>
 </div>

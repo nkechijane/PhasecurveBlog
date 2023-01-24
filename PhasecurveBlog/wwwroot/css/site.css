@@ -16,3 +16,11 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/* styling for description columm in GetallArticles Tables*/
+.chars {
+  max-width: 50ch;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

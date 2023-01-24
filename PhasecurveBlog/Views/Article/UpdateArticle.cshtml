@@ -1,11 +1,30 @@
 @model Article
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "Edit Article";
     if (ViewData["Error"].ToString() != "false")
     {
         <h2>@ViewData["Error"] </h2>
     }
 }
 
-<h2>title</h2>
+<form method="post">
+    <div>
+        <label for="title" style="font-weight: 500;">Title<span style="color: rgb(185, 74, 72);"></span></label>
+        <input type="text" id="title" name="title" value="@Model.Title">
+        <input type="text" id="id" maxlength="50" name="id" value="@Model.Id" hidden>
+    </div>
+    <div>
+        <label for="description" style="font-weight: 500;">Description<span style="color: rgb(185, 74, 72);"></span></label>
+        <input type="text" id="description" maxlength="50" name="description" value="@Model.Description">
+    </div> 
+    <div>
+        <label for="body" style="font-weight: 500;">Body<span style="color: rgb(185, 74, 72);"></span></label>
+        <input type="text" id="body" maxlength="20000" name="body" value="@Model.Body">
+    </div>
+    <div>
+        <label for="image" style="font-weight: 500;">Image<span style="color: rgb(185, 74, 72);"></span></label>
+        <input type="text" id="image" maxlength="100" name="image" value="@Model.Images">
+    </div>
+   <button type="submit">Submit</button>
+</form>

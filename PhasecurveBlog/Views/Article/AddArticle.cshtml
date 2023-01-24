@@ -4,4 +4,24 @@
     ViewBag.Title = "Add Article";
 }
 
-<h2>Add a new article</h2>
+<form method="post">
+    <div>
+        <label for="Title" style="font-weight: 500;">Title<span style="color: rgb(185, 74, 72);">**</span></label>
+        <input type="text" id="Title" name="Title" required>
+    </div>
+    <div>
+        <label for="Description" style="font-weight: 500;">Description<span style="color: rgb(185, 74, 72);">**</span></label>
+        <input type="text" id="Description" name="Description" required>
+    </div>
+    <div>
+        <label for="Body" style="font-weight: 500;">Body<span style="color: rgb(185, 74, 72);">**</span></label>
+        <input type="text" id="Body" name="Body" required>
+    </div>
+    <div>
+        <label for="Images" style="font-weight: 500;">Image<span style="color: rgb(185, 74, 72);"></span></label>
+        <input type="text" id="Images" name="Images" required>
+    </div>
+    
+    <button type="submit"> Submit </button>
+</form>
+
